@@ -8,6 +8,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+rate-repository-app.iml
 
 # macOS
 .DS_Store
