@@ -1,7 +1,7 @@
 import React from "react";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import Constants from "expo-constants";
-import Text from "./Text";
+import AppTab from "./AppTab";
 
 const styles = StyleSheet.create({
   container: {
@@ -20,11 +20,10 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback>
-        <Text fontWeight="bold" style={styles.text}>
-          Repositories
-        </Text>
-      </TouchableWithoutFeedback>
+      <ScrollView horizontal>
+        <AppTab text="Repositories" url="/" />
+        <AppTab text="Signin" url="/signin" />
+      </ScrollView>
     </View>
   );
 };
