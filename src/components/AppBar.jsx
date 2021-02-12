@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
+import { useApolloClient, useQuery } from "@apollo/react-hooks";
 import Constants from "expo-constants";
 import AppTab from "./AppTab";
+import AuthStorageContext from "../contexts/AuthStorageContext";
+import { GET_AUTHORIZED_USER } from "../graphql/queries";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,11 +21,39 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const authStorage = useContext(AuthStorageContext);
+  const apolloClient = useApolloClient();
+
+  const accessToken = authStorage.getAccessToken();
+
+  let authorizedUser = null;
+
+  if (accessToken) {
+    const { data } = useQuery(GET_AUTHORIZED_USER, {
+      fetchPolicy: "cache-and-network",
+    });
+
+    if (data) {
+      data.authorizedUser
+        ? (authorizedUser = data.authorizedUser)
+        : (authorizedUser = null);
+    }
+  }
+
+  const signOut = async () => {
+    await authStorage.removeAccessToken();
+    await apolloClient.resetStore();
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppTab text="Repositories" url="/" />
-        <AppTab text="Sign in" url="/signin" />
+        {authorizedUser ? (
+          <AppTab text="Sign out" url="/" onPress={signOut} />
+        ) : (
+          <AppTab text="Sign in" url="/signin" />
+        )}
       </ScrollView>
     </View>
   );
