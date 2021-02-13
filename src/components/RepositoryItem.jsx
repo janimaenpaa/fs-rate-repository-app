@@ -38,23 +38,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const InfoItem = ({ value, title }) => {
-  if (value >= 1000) {
-    return (
-      <View styles={styles.infoItem}>
+const InfoItem = ({ value, title, testID }) => {
+  return (
+    <View styles={styles.infoItem} testID={testID}>
+      {value >= 1000 ? (
         <Text fontWeight="bold" align="center">{`${(value / 1000).toFixed(
           1
         )}k`}</Text>
-        <Text color="textSecondary">{title}</Text>
-      </View>
-    );
-  }
-
-  return (
-    <View styles={styles.infoItem}>
-      <Text fontWeight="bold" align="center">
-        {value}
-      </Text>
+      ) : (
+        <Text fontWeight="bold" align="center">
+          {value}
+        </Text>
+      )}
       <Text color="textSecondary">{title}</Text>
     </View>
   );
@@ -67,13 +62,18 @@ const TopBar = ({ ownerAvatarUrl, fullName, description, language }) => (
       source={{
         uri: ownerAvatarUrl,
       }}
+      testID="avatarUrl"
     />
     <View style={styles.column}>
-      <Text fontWeight="bold">{fullName}</Text>
-      <Text fontSize="subheading" color="textSecondary">
+      <Text fontWeight="bold" testID="fullName">
+        {fullName}
+      </Text>
+      <Text fontSize="subheading" color="textSecondary" testID="description">
         {description}
       </Text>
-      <Text style={styles.language}>{language}</Text>
+      <Text style={styles.language} testID="language">
+        {language}
+      </Text>
     </View>
   </View>
 );
@@ -85,10 +85,10 @@ const BottomBar = ({
   ratingAverage,
 }) => (
   <View style={styles.row}>
-    <InfoItem value={stargazersCount} title="Stars" />
-    <InfoItem value={forksCount} title="Forks" />
-    <InfoItem value={reviewCount} title="Reviews" />
-    <InfoItem value={ratingAverage} title="Rating" />
+    <InfoItem value={stargazersCount} title="Stars" testID="stargazersCount" />
+    <InfoItem value={forksCount} title="Forks" testID="forksCount" />
+    <InfoItem value={reviewCount} title="Reviews" testID="reviewCount" />
+    <InfoItem value={ratingAverage} title="Rating" testID="ratingAverage" />
   </View>
 );
 
