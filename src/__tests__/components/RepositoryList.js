@@ -2,9 +2,6 @@ import React from "react";
 import { render } from "@testing-library/react-native";
 import { RepositoryListContainer } from "../../components/RepositoryList";
 
-/* eslint-disable jest/expect-expect */
-/* eslint-disable no-unused-vars */
-
 const thousandsToK = (value) => {
   if (value >= 1000) return `${(value / 1000).toFixed(1)}k`;
 
