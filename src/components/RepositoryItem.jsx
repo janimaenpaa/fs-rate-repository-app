@@ -1,5 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useHistory } from "react-router-native";
 import theme from "../theme";
 import Text from "./Text";
 
@@ -93,11 +94,17 @@ const BottomBar = ({
 );
 
 const RepositoryItem = (props) => {
+  const history = useHistory();
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => history.push(`/${props.id}`)}
+    >
       <TopBar {...props} />
       <BottomBar {...props} />
-    </View>
+      {props.children}
+    </TouchableOpacity>
   );
 };
 
