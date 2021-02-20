@@ -55,7 +55,10 @@ const AppBar = () => {
             <AppTab text="Sign out" url="/" onPress={signOut} />
           </React.Fragment>
         ) : (
-          <AppTab text="Sign in" url="/signin" />
+          <React.Fragment>
+            <AppTab text="Sign in" url="/signin" />
+            <AppTab text="Sign up" url="/signup" />
+          </React.Fragment>
         )}
       </ScrollView>
     </View>

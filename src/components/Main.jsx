@@ -4,8 +4,9 @@ import { Route, Switch, Redirect } from "react-router-native";
 import RepositoryList from "./RepositoryList";
 import AppBar from "./AppBar";
 import SignIn from "./SignIn";
-import Repository from "./SingleRepository";
+import SingleRepository from "./SingleRepository";
 import Review from "./Review";
+import SignUp from "./SignUp";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,11 +24,14 @@ const Main = () => {
         <Route path="/signin">
           <SignIn />
         </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
         <Route path="/review">
           <Review />
         </Route>
         <Route path="/:id">
-          <Repository />
+          <SingleRepository />
         </Route>
         <Route path="/" exact>
           <RepositoryList />
