@@ -7,9 +7,9 @@ const sortOptions = {
   lowestRated: { orderBy: "RATING_AVERAGE", orderDirection: "ASC" },
 };
 
-const useRepositories = (sortBy) => {
+const useRepositories = (sortBy, searchKeyword) => {
   const { loading, data, refetch } = useQuery(GET_REPOSITORIES, {
-    variables: sortOptions[sortBy],
+    variables: { ...sortOptions[sortBy], searchKeyword },
     fetchPolicy: "cache-and-network",
   });
 
