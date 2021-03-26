@@ -52,6 +52,7 @@ const AppBar = () => {
         {authorizedUser ? (
           <React.Fragment>
             <AppTab text="Create a review" url="/review" />
+            <AppTab text="My reviews" url="/myreviews" />
             <AppTab text="Sign out" url="/" onPress={signOut} />
           </React.Fragment>
         ) : (
